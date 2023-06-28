@@ -29,7 +29,7 @@ module Shopify
           next_button_class = items.cursor_pagination[:next].blank? && 'Polaris-Button--disabled'
         end
 
-        %(<nav class="#{options[:pagination_class]}" aria-label="Pagination">
+        %(<nav class="#{options[:pagination_class]} " aria-label="Pagination">
           <div data-buttongroup-segmented="true" class="Polaris-ButtonGroup Polaris-ButtonGroup--segmented">
             <div class="Polaris-ButtonGroup__Item">
               <a href="#{previous_button_url}" data-controller="polaris-button" class="Polaris-Button Polaris-Button--outline Polaris-Button--iconOnly #{previous_button_class}">
@@ -58,7 +58,7 @@ module Shopify
               </a>
             </div>
           </div>
-        </nav>).html_safe
+        </nav>).html_safe if items.cursor_pagination[:previous] || items.cursor_pagination[:next]
       end
 
       def cursor_paginate(items, options = {})
